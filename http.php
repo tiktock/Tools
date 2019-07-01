@@ -1,4 +1,13 @@
 <?php
+if(!function_exists('http_build_cookie')){
+    function http_build_cookie($cookie){
+        $c='';
+        foreach($cookie as $k => $v){
+            $c.=urlencode($k).'='.urlencode($v).';';
+        }
+        return $c;
+    }
+}
 class http{
     public $curl=null;
 
@@ -169,12 +178,5 @@ class http{
             return $this->build_url(array_merge($this->urlParsed, $parsed));
         }
     }
-}
-function http_build_cookie($cookie){
-    $c='';
-    foreach($cookie as $k => $v){
-        $c.=urlencode($k).'='.urlencode($v).';';
-    }
-    return $c;
 }
 // curl_file_create
